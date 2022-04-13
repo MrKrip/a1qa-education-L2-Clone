@@ -8,7 +8,6 @@ namespace SMART_DataDriven_KPC.Test_conditions
         [SetUp]
         public void Setup()
         {
-            AqualityServices.Browser.Maximize();
             AqualityServices.Browser.GoTo(ConfigClass.MainUrl);
         }
 
