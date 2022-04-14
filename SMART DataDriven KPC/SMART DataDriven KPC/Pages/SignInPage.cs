@@ -17,10 +17,10 @@ namespace SMART_DataDriven_KPC.Pages
 
         }
 
-        public void SignIn(UserAccountModel model)
+        public void SignIn(string UserName,string Password)
         {
-            EmailTextBox.SendKeys(model.UserName);
-            PasswordTextBox.SendKeys(model.Password);
+            EmailTextBox.SendKeys(UserName);
+            PasswordTextBox.SendKeys(Password);
             SignInButton.Click();
         }
     }

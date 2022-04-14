@@ -1,14 +1,19 @@
 ﻿using Aquality.Selenium.Browsers;
 using NUnit.Framework;
+using SMART_DataDriven_KPC.Util;
+using System.Collections.Generic;
 
 namespace SMART_DataDriven_KPC.Test_conditions
 {
     public class BaseTest
     {
+        protected Dictionary<string, string> Config;
+
         [SetUp]
         public void Setup()
         {
-            AqualityServices.Browser.GoTo(ConfigClass.MainUrl);
+            Config = ParseJSON.GetConfigFile(ConfigClass.ConfigPath);
+            AqualityServices.Browser.GoTo(Config["MainPageUrl"]);
         }
 
         [TearDown]

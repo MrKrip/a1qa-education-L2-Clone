@@ -16,20 +16,19 @@ namespace SMART_DataDriven_KPC.Pages
 
         }
 
-        public void PrepareToSendSelf(UserAccountModel model)
+        public void ChooseOS(string OS)
         {
-            IElement OsFilter = AqualityServices.Get<IElementFactory>().GetButton(By.XPath($"//div[contains(@class,'osFilter') and div[contains(.,'{model.OS}')]]"), "OS filter button");
+            IElement OsFilter = AqualityServices.Get<IElementFactory>().GetButton(By.XPath($"//div[contains(@class,'osFilter') and div[contains(.,'{OS}')]]"), "OS filter button");
             OsFilter.Click();
+        }
 
+        public void ChooseProduct(string Product)
+        {
             IElement SendToMyselfButton = AqualityServices.Get<IElementFactory>()
-                .GetButton(By.XPath($"//div[@data-at-selector='downloadApplicationCard' and div[contains(.,'{model.Product}')]]//button[@data-at-selector='appInfoSendToEmail']"), "Send to myself button");
+                .GetButton(By.XPath($"//div[@data-at-selector='downloadApplicationCard' and div[contains(.,'{Product}')]]//button[@data-at-selector='appInfoSendToEmail']"), "Send to myself button");
             SendToMyselfButton.Click();
         }
 
-        public string GetEmailFromSendSelf()
-        {
-            return SendTextBox.Text;
-        }
 
         public void SendSelf()
         {
