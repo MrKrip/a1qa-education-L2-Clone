@@ -1,0 +1,9 @@
+{
+  "MainUrl": "https://jsonplaceholder.typicode.com/",
+  "AllPosts": "/posts",
+  "DefinitePost": "/posts/99",
+  "Non-existentPost": "/posts/150",
+  "SendPost": "/posts",
+  "AllUsers": "/users",
+  "DefiniteUser": "/users/5"
+}

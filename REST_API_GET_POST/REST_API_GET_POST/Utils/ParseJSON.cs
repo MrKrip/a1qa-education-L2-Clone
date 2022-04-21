@@ -4,7 +4,7 @@ using System.IO;
 
 namespace REST_API_GET_POST.Utils
 {
-    class ParseJSON
+    public class ParseJSON
     {
         public static Dictionary<string, string> GetConfigFile(string path)
         {

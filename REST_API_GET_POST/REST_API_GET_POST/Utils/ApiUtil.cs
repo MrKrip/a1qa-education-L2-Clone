@@ -24,10 +24,13 @@ namespace REST_API_GET_POST.Utils
             return (ParseJSON.ModelFromJson<T>(response.Content),response.StatusCode.ToString());
         }
 
-        public static string Post(string RequestUrl,object Json)
+        public static (T, string) PostRequest<T>(string RequestUrl,object Json)
         {
             var request = new RestRequest(RequestUrl).AddJsonBody(Json);
-            return Client.Post(request).StatusCode.ToString();
+            var response = Client.Post(request);
+            return (ParseJSON.ModelFromJson<T>(response.Content), response.StatusCode.ToString());
         }
+
+
     }
 }
