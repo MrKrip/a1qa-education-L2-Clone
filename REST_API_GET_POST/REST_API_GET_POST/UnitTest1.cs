@@ -12,8 +12,7 @@ namespace REST_API_GET_POST
         public void Test1()
         {
             ApiRequest apiRequest = new ApiRequest();
-            PostModel post = new PostModel() { body = "123456",userId=1,id=101, title="sadfgnhmj,klkjhgfdsaxdfgrtf" };
-            apiRequest.SendPost(post);
+
             Assert.Pass();
         }
     }

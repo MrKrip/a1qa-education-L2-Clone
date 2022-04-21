@@ -16,24 +16,34 @@ namespace REST_API_GET_POST.ApiRequests
             return (ListOfAllPost, StatusCode);
         }
 
-        public (PostModel, string) GetUserDefiniteRequest()
+        public (PostModel, string) GetDefinitePostRequest()
         {
             (var DefinitePost, var StatusCode) = ApiUtil.GetRequest<PostModel>(ConfigClass.Config["DefinitePost"]);
             return (DefinitePost, StatusCode);
         }
 
-        public (PostModel, string) GetNonExistentPost()
+        public (PostModel, string) GetNonExistentPostRequest()
         {
             (var NonExistentPost, var StatusCode) = ApiUtil.GetRequest<PostModel>(ConfigClass.Config["Non-existentPost"]);
             return (NonExistentPost, StatusCode);
         }
 
-        public (PostModel, string) SendPost(PostModel post)
+        public (PostModel, string) SendPostRequest(PostModel post)
         {
-            (var SendPost, var StatusCode) = ApiUtil.PostRequest<PostModel>(ConfigClass.Config["SendPost"],post);
+            (var SendPost, var StatusCode) = ApiUtil.PostRequest<PostModel>(ConfigClass.Config["SendPost"], post);
             return (SendPost, StatusCode);
         }
 
+        public (List<UserModel>, string) GetAllUersRequest()
+        {
+            (var ListOfAllUsers, var StatusCode) = ApiUtil.GetRequest<List<UserModel>>(ConfigClass.Config["AllUsers"]);
+            return (ListOfAllUsers, StatusCode);
+        }
 
-    }
+        public (UserModel,string) GetDefiniteUserRequest()
+        {
+            (var DefiniteUser, var StatusCode) = ApiUtil.GetRequest<UserModel>(ConfigClass.Config["DefiniteUser"]);
+            return (DefiniteUser, StatusCode);
+        }
+}
 }
