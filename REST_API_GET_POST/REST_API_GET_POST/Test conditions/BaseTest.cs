@@ -8,7 +8,7 @@ namespace REST_API_GET_POST.Test_conditions
 
         [SetUp]
         public void Setup()
-        {          
+        {
             ApiUtil.SetClient(ConfigClass.Config["MainUrl"]);
         }
     }

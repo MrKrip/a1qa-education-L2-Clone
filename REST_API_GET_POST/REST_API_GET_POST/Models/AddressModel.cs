@@ -1,4 +1,6 @@
-﻿namespace REST_API_GET_POST.Models
+﻿using Aquality.Selenium.Browsers;
+
+namespace REST_API_GET_POST.Models
 {
     public class AddressModel
     {
@@ -10,6 +12,7 @@
 
         public bool AreAddressEqual(AddressModel address)
         {
+            AqualityServices.Logger.Info($"Address match check");
             return geo.AreGeoEqual(address.geo) && street == address.street && suite == address.suite && city == address.city && zipcode == address.zipcode;
         }
     }

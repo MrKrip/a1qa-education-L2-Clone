@@ -1,10 +1,6 @@
 ﻿using REST_API_GET_POST.Models;
 using REST_API_GET_POST.Utils;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace REST_API_GET_POST.ApiRequests
 {

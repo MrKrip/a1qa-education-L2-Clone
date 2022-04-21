@@ -1,4 +1,6 @@
-﻿namespace REST_API_GET_POST.Models
+﻿using Aquality.Selenium.Browsers;
+
+namespace REST_API_GET_POST.Models
 {
     public class UserModel
     {
@@ -13,6 +15,7 @@
 
         public bool AreUsersEqual(UserModel user)
         {
+            AqualityServices.Logger.Info($"Users match check");
             return address.AreAddressEqual(user.address) && company.AreCompanysEqual(user.company) && id == user.id && username == user.username && email == user.email && phone == user.phone && website == user.website;
         }
     }

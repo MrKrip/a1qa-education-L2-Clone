@@ -1,4 +1,5 @@
-﻿using REST_API_GET_POST.Models;
+﻿using Aquality.Selenium.Browsers;
+using REST_API_GET_POST.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,15 @@ namespace REST_API_GET_POST.Utils
     public static class CompareUtil
     {
 
-        public static bool IsListsOfPostsAreEqual(List<PostModel> list1,List<PostModel> list2)
+        public static bool IsListsOfPostsAreEqual(List<PostModel> list1, List<PostModel> list2)
         {
+            AqualityServices.Logger.Info($"Comparison of two lists of posts");
             if (list1.Count != list2.Count)
                 return false;
-           
-            for(int i=0;i<list1.Count; i++)
+
+            for (int i = 0; i < list1.Count; i++)
             {
-                if(!list1[i].ArePostsEqual(list2[i]))
+                if (!list1[i].ArePostsEqual(list2[i]))
                 {
                     return false;
                 }
@@ -27,9 +29,10 @@ namespace REST_API_GET_POST.Utils
 
         public static bool IsListOfPostsAreSorted(List<PostModel> list1)
         {
-            for(int i=0;i<list1.Count-1;i++)
+            AqualityServices.Logger.Info($"Checking if the list of posts is sorted");
+            for (int i = 0; i < list1.Count - 1; i++)
             {
-                if(list1[i].id>list1[i+1].id)
+                if (list1[i].id > list1[i + 1].id)
                 {
                     return false;
                 }
@@ -37,11 +40,12 @@ namespace REST_API_GET_POST.Utils
             return true;
         }
 
-        public static bool IsUserConsistInList(List<UserModel> users,UserModel user)
+        public static bool IsUserConsistInList(List<UserModel> users, UserModel user)
         {
-            for(int i=0;i<users.Count;i++)
+            AqualityServices.Logger.Info($"Checking if the user is in the list");
+            for (int i = 0; i < users.Count; i++)
             {
-                if(users[i].AreUsersEqual(user))
+                if (users[i].AreUsersEqual(user))
                 {
                     return true;
                 }
