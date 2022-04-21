@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace REST_API_GET_POST.Models
+﻿namespace REST_API_GET_POST.Models
 {
-    public class AdressModel
+    public class AddressModel
     {
         public string street { get; set; }
         public string suite { get; set; }
         public string city { get; set; }
         public string zipcode { get; set; }
         public GeoModel geo { get; set; }
+
+        public bool AreAddressEqual(AddressModel address)
+        {
+            return geo.AreGeoEqual(address.geo) && street == address.street && suite == address.suite && city == address.city && zipcode == address.zipcode;
+        }
     }
 }

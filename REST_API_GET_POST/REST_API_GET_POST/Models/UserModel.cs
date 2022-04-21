@@ -10,5 +10,10 @@
         public string phone { get; set; }
         public string website { get; set; }
         public CompanyModel company { get; set; }
+
+        public bool AreUsersEqual(UserModel user)
+        {
+            return address.AreAddressEqual(user.address) && company.AreCompanysEqual(user.company) && id == user.id && username == user.username && email == user.email && phone == user.phone && website == user.website;
+        }
     }
 }

@@ -5,5 +5,10 @@
         public string name { get; set; }
         public string catchPhrase { get; set; }
         public string bs { get; set; }
+
+        public bool AreCompanysEqual(CompanyModel company)
+        {
+            return name == company.name && catchPhrase == company.catchPhrase && bs == company.bs;
+        }
     }
 }

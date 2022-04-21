@@ -4,5 +4,10 @@
     {
         public string lat { get; set; }
         public string lng { get; set; }
+
+        public bool AreGeoEqual(GeoModel geo)
+        {
+            return lat == geo.lat && lng == geo.lng;
+        }
     }
 }
