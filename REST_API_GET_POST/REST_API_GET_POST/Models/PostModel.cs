@@ -1,18 +1,33 @@
 ﻿using Aquality.Selenium.Browsers;
+using System;
 
 namespace REST_API_GET_POST.Models
 {
-    public class PostModel
+    public class PostModel : IEquatable<PostModel>
     {
         public int userId { get; set; }
         public int id { get; set; }
         public string title { get; set; }
         public string body { get; set; }
 
-        public bool ArePostsEqual(PostModel post)
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as PostModel);
+        }
+
+        public bool Equals(PostModel other)
         {
             AqualityServices.Logger.Info($"Posts match check");
-            return (id == post.id) && (userId == post.userId) && (title == post.title) && (body == post.body);
+            return other != null &&
+                   userId == other.userId &&
+                   id == other.id &&
+                   title == other.title &&
+                   body == other.body;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(userId, id, title, body);
         }
 
         public bool IsEmpty()

@@ -19,7 +19,7 @@ namespace REST_API_GET_POST.Utils
 
             for (int i = 0; i < list1.Count; i++)
             {
-                if (!list1[i].ArePostsEqual(list2[i]))
+                if (!list1[i].Equals(list2[i]))
                 {
                     return false;
                 }
@@ -45,7 +45,7 @@ namespace REST_API_GET_POST.Utils
             AqualityServices.Logger.Info($"Checking if the user is in the list");
             for (int i = 0; i < users.Count; i++)
             {
-                if (users[i].AreUsersEqual(user))
+                if (users[i].Equals(user))
                 {
                     return true;
                 }

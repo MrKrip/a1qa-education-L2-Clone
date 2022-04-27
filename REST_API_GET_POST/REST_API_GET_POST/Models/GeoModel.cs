@@ -1,16 +1,30 @@
 ﻿using Aquality.Selenium.Browsers;
+using System;
 
 namespace REST_API_GET_POST.Models
 {
-    public class GeoModel
+    public class GeoModel : IEquatable<GeoModel>
     {
         public string lat { get; set; }
         public string lng { get; set; }
 
-        public bool AreGeoEqual(GeoModel geo)
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as GeoModel);
+        }
+
+        public bool Equals(GeoModel other)
         {
             AqualityServices.Logger.Info($"Geo match check");
-            return lat == geo.lat && lng == geo.lng;
+            return other != null &&
+                   lat == other.lat &&
+                   lng == other.lng;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(lat, lng);
         }
     }
 }
