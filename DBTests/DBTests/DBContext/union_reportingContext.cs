@@ -34,7 +34,7 @@ namespace DBTests
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=127.0.0.1;uid=root;pwd=cTH58A6vz;database=union_reporting", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.29-mysql"));
+                optionsBuilder.UseMySql(ConfigClass.Config["ConnectionString"], Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.29-mysql"));
             }
         }
 
