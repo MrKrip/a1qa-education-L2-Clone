@@ -10,5 +10,6 @@ namespace DBTests
         public static readonly Dictionary<string, string> Config = ParseJSON.GetConfigFile(DefaultPath + @"\Resources\Config.json");
         public static readonly string MinTimeTestPath = DefaultPath + @"\Resources\MinTime.Json";
         public static readonly string TestCountPath = DefaultPath + @"\Resources\TestCount.Json";
+        public static readonly string DateCondTestPath = DefaultPath + @"\Resources\DateCondTestPath.Json";
     }
 }

@@ -25,5 +25,13 @@ namespace DBTests
             var NumberOfUnique = ParseJSON.GetDataFile<List<NumberOfUniqueTests>>(ConfigClass.TestCountPath);
             Assert.IsTrue(CompareUtil.IsListsAreEqual(NumberOfUniqueResp, NumberOfUnique), "The number of unique tests on the projects does not match the test data");
         }
+
+        [Test]
+        public void DateConditionTests()
+        {
+            var DateConditionResp=dBRequests.GetDateConditionTests();
+            var DateCondition = ParseJSON.GetDataFile<List<DateConditionModel>>(ConfigClass.DateCondTestPath);
+            Assert.IsTrue(CompareUtil.IsListsAreEqual(DateConditionResp, DateCondition), "The date conditions tests does not match the test data");
+        }
     }
 }

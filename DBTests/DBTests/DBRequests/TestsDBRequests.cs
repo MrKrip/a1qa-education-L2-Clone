@@ -49,5 +49,21 @@ namespace DBTests.DBRequests
                 return TestsCount.ToList();
             }
         }
+
+        public List<DateConditionModel> GetDateConditionTests()
+        {
+            using (union_reportingContext db = new union_reportingContext())
+            {
+                var DateCondTests = db.Tests.ToList()
+                    .Where(T => T.StartTime > new DateTime(2015, 11, 7))
+                    .Join(db.Projects.ToList()
+                    , T => T.ProjectId
+                    , P => P.Id
+                    , (T, P) => new DateConditionModel { Project = P.Name, Test = T.Name, Date = T.StartTime.GetValueOrDefault() })
+                    .OrderBy(D=>D.Project)
+                    .ThenBy(D=>D.Test);
+                return DateCondTests.ToList();
+            }
+        }
     }
 }
