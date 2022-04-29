@@ -32,5 +32,22 @@ namespace DBTests.DBRequests
                 return MinTime;
             }
         }
+
+        public List<NumberOfUniqueTests> GetNumberOfUniqueTests()
+        {
+            using (union_reportingContext db = new union_reportingContext())
+            {
+                var TestsCount = db.Tests.ToList()
+                    .GroupBy(T => new { Test = T.Name, Project = T.ProjectId })
+                    .Select(X => X.FirstOrDefault())
+                    .Join(db.Projects.ToList()
+                    , T => T.ProjectId
+                    , P => P.Id
+                    , (T, P) => new { Project = P.Name, TestName = T.Name })
+                    .GroupBy(P => P.Project)
+                    .Select(TC => new NumberOfUniqueTests { Project = TC.Key, TestsCount = TC.Count() });
+                return TestsCount.ToList();
+            }
+        }
     }
 }

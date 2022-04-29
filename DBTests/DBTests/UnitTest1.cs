@@ -13,10 +13,17 @@ namespace DBTests
         [Test]
         public void MinWorkingTime()
         {
-            TestsDBRequests dBRequests = new TestsDBRequests();
             var MinWorkingTimeResp = dBRequests.GetMinWorkingTime();
             var MinWorkingTime = ParseJSON.GetDataFile<List<MinTimeTestModel>>(ConfigClass.MinTimeTestPath);
-            Assert.IsTrue(CompareUtil.IsListsAreEqual(MinWorkingTimeResp,MinWorkingTime), "Minimum run time for tests with test data");
+            Assert.IsTrue(CompareUtil.IsListsAreEqual(MinWorkingTimeResp, MinWorkingTime), "The minimum test execution time does not match the test data");
+        }
+
+        [Test]
+        public void NumberOfUniqueTests()
+        {
+            var NumberOfUniqueResp = dBRequests.GetNumberOfUniqueTests();
+            var NumberOfUnique = ParseJSON.GetDataFile<List<NumberOfUniqueTests>>(ConfigClass.TestCountPath);
+            Assert.IsTrue(CompareUtil.IsListsAreEqual(NumberOfUniqueResp, NumberOfUnique), "The number of unique tests on the projects does not match the test data");
         }
     }
 }
