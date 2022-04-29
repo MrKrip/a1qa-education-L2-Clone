@@ -60,9 +60,29 @@ namespace DBTests.DBRequests
                     , T => T.ProjectId
                     , P => P.Id
                     , (T, P) => new DateConditionModel { Project = P.Name, Test = T.Name, Date = T.StartTime.GetValueOrDefault() })
-                    .OrderBy(D=>D.Project)
-                    .ThenBy(D=>D.Test);
+                    .OrderBy(D => D.Project)
+                    .ThenBy(D => D.Test);
                 return DateCondTests.ToList();
+            }
+        }
+
+        public List<BrowserCountTestModel> GetBrowserCountTests()
+        {
+            using (union_reportingContext db = new union_reportingContext())
+            {
+                var BrowserCountTests = db.Tests.ToList()
+                    .Select(T => new BrowserCountTestModel
+                    {
+                        Brosers = db.Tests.ToList()
+                    .Where(T => T.Browser == "chrome").Count()
+                    })
+                    .Union(db.Tests.ToList()
+                    .Select(T => new BrowserCountTestModel
+                    {
+                        Brosers = db.Tests.ToList()
+                    .Where(T => T.Browser == "firefox").Count()
+                    }));
+                return BrowserCountTests.ToList();
             }
         }
     }

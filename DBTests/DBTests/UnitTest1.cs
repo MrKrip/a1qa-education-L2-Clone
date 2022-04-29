@@ -33,5 +33,13 @@ namespace DBTests
             var DateCondition = ParseJSON.GetDataFile<List<DateConditionModel>>(ConfigClass.DateCondTestPath);
             Assert.IsTrue(CompareUtil.IsListsAreEqual(DateConditionResp, DateCondition), "The date conditions tests does not match the test data");
         }
+
+        [Test]
+        public void BrowserCountTests()
+        {
+            var BrowserCountResp = dBRequests.GetBrowserCountTests();
+            var BrowserCount = ParseJSON.GetDataFile<List<BrowserCountTestModel>>(ConfigClass.BrowserCountTestPath);
+            Assert.IsTrue(CompareUtil.IsListsAreEqual(BrowserCountResp, BrowserCount), "The browsers count tests does not match the test data");
+        }
     }
 }
