@@ -26,5 +26,15 @@ namespace DBTests.Utils
             AqualityServices.Logger.Info($"Convert json to model");
             return JsonConvert.DeserializeObject<T>(Json);
         }
+
+        public static void ModelToJson<T>(string path, T model)
+        {
+            using (FileStream streamReader = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                string newJson = JsonConvert.SerializeObject(model);
+                streamReader.Close();
+                File.WriteAllText(path, newJson);
+            }
+        }
     }
 }
