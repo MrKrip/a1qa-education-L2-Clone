@@ -1,6 +1,7 @@
 ﻿using Aquality.Selenium.Browsers;
 using RestSharp;
 using RestSharp.Authenticators;
+using SMART_VK_API.Models;
 
 namespace SMART_VK_API.Util
 {
@@ -14,10 +15,10 @@ namespace SMART_VK_API.Util
             Client = new RestClient(Url);
         }
 
-        public static void SetHttpAuth(string UserName, string Password)
+        public static void SetHttpAuth(UserModel user)
         {
             AqualityServices.Logger.Info("Setting Http Basic Authenticator");
-            Client.Authenticator = new HttpBasicAuthenticator(UserName, Password);
+            Client.Authenticator = new HttpBasicAuthenticator(user.Login, user.Password);
         }
 
         public static (T, string) GetRequest<T>(string RequestUrl)
