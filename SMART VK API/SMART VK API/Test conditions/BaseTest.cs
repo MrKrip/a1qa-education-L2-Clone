@@ -6,13 +6,12 @@ namespace SMART_VK_API.Test_conditions
 {
     public class BaseTest
     {
-        protected Dictionary<string, string> Config;
 
         [SetUp]
         public void Setup()
         {
-            Config = ParseJSON.GetConfigFile(ConfigClass.ConfigPath);
-            AqualityServices.Browser.GoTo(Config["MainPageUrl"]);
+            ApiUtils.SetClient(ConfigClass.Config["ApiUrl"]);
+            AqualityServices.Browser.GoTo(ConfigClass.Config["MainPageUrl"]);
         }
 
         [TearDown]

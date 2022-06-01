@@ -1,3 +1,5 @@
 {
-  "MainPageUrl": "https://vk.com/"
+  "MainPageUrl": "https://vk.com/",
+  "ApiUrl": "https://api.vk.com/method",
+  "WallPost": "/wall.post"
 }

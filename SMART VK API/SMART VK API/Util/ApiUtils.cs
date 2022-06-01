@@ -38,5 +38,14 @@ namespace SMART_VK_API.Util
             AqualityServices.Logger.Info($"Returning '{RequestUrl}' POST respond");
             return (ParseJSON.ModelFromJson<T>(response.Content), response.StatusCode.ToString());
         }
+
+        public static (T, string) PostRequest<T>(string RequestUrl)
+        {
+            AqualityServices.Logger.Info($"Creating '{RequestUrl}' POST request");
+            var request = new RestRequest(RequestUrl);
+            var response = Client.Post(request);
+            AqualityServices.Logger.Info($"Returning '{RequestUrl}' POST respond");
+            return (ParseJSON.ModelFromJson<T>(response.Content), response.StatusCode.ToString());
+        }
     }
 }
