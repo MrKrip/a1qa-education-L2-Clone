@@ -16,6 +16,7 @@ namespace SMART_VK_API.Pages
 
         public void OpenMyPage()
         {
+            MyPageLink.State.WaitForEnabled();
             MyPageLink.Click();
         }
     }

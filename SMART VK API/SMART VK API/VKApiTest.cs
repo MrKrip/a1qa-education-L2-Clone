@@ -14,7 +14,7 @@ namespace SMART_VK_API
         public void Test1()
         {
             UserModel user = ParseJSON.GetDataFile<UserModel>(ConfigClass.UserDataPath);
-            WallPostModel wallPost = new WallPostModel() { access_token = user.Token, v = "5.131" };
+            WallPostModel wallPost = new WallPostModel() { access_token = user.Token, v = ConfigClass.Config["ApiVersion"] };
 
             VkRequests vkRequests = new VkRequests();
 
@@ -25,8 +25,13 @@ namespace SMART_VK_API
             signIn.SignIn(user);
             sideBar.OpenMyPage();
 
-            (var PostId, var StatusCode) = vkRequests.WallPost(wallPost);
+            (var PostId, var StatusCode) = vkRequests.WallPost(ref wallPost);
             bool PostExist = profile.IsPostExist(user.Id, PostId);
+
+            (var UploadServer, StatusCode) = vkRequests.GetUploadServer(user);
+            (var PhotoInfo, StatusCode) = vkRequests.UploadPhoto(UploadServer);
+            (var SaveFotoResp, StatusCode) = vkRequests.SavePhoto(user, PhotoInfo);
+            (var PostIdSecond, StatusCode) = vkRequests.WallEdit(PostId, user, SaveFotoResp.response[0]);
             Assert.Pass();
         }
     }

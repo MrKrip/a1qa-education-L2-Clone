@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace SMART_VK_API.Models
 {
-    public class RespModel<T>
+    public class UploadPhotoModel
     {
-        public T response { get; set; }
+        public int server { get; set; }
+        public string photo { get; set; }
+        public string hash { get; set; }
     }
 }

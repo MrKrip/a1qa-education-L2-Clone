@@ -8,5 +8,6 @@ namespace SMART_VK_API
         public static readonly Dictionary<string, string> Config = ParseJSON.GetConfigFile(DefaultPath + @"\Resources\Config.json");
         public static readonly string ConfigPath = DefaultPath + @"\Resources\config.json";
         public static readonly string UserDataPath = DefaultPath + @"\Resources\User.json";
+        public static readonly string PhotoPath = DefaultPath + @"\Resources\TestPhoto.jpg";
     }
 }

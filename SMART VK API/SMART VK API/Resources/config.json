@@ -1,5 +1,11 @@
 {
   "MainPageUrl": "https://vk.com/",
   "ApiUrl": "https://api.vk.com/method",
-  "WallPost": "/wall.post"
+  "ApiVersion": "5.131",
+  "WallPost": "/wall.post",
+  "UplServer": "/photos.getWallUploadServer",
+  "SavePhoto": "/photos.saveWallPhoto",
+  "WallEdit": "/wall.edit",
+  "PhotoParameterName": "photo",
+  "PhotoContentType": "multipart/form-data"
 }

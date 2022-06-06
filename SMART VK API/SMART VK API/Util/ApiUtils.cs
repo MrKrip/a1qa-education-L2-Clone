@@ -47,5 +47,16 @@ namespace SMART_VK_API.Util
             AqualityServices.Logger.Info($"Returning '{RequestUrl}' POST respond");
             return (ParseJSON.ModelFromJson<T>(response.Content), response.StatusCode.ToString());
         }
+
+        public static (T, string) PostRequest<T>(string RequestUrl,string parameterName,string filePath, string contentType)
+        {
+            AqualityServices.Logger.Info($"Creating '{RequestUrl}' POST request");
+            var request = new RestRequest(RequestUrl);
+            request.AddFile(parameterName,filePath, contentType);
+            RestClient TempClient=new RestClient();
+            var response = TempClient.Post(request);
+            AqualityServices.Logger.Info($"Returning '{RequestUrl}' POST respond");
+            return (ParseJSON.ModelFromJson<T>(response.Content), response.StatusCode.ToString());
+        }
     }
 }
