@@ -30,10 +30,16 @@ namespace SMART_VK_API.ApiRequests
             return (Response, StatusCode);
         }
 
-        public (int, string) WallEdit(int postId,UserModel user, SavePhotoModel photo)
+        public (int, string) WallEdit(int postId, UserModel user, SavePhotoModel photo)
         {
             (var Response, var StatusCode) = ApiUtils.PostRequest<RespModel<WallPostRespModel>>($"{ConfigClass.Config["WallEdit"]}?post_id={postId}&message={TextGenerator.GenerteText()}&attachments=photo{user.Id}_{photo.id}&access_token={user.Token}&v={ConfigClass.Config["ApiVersion"]}");
             return (Response.response.post_id, StatusCode);
+        }
+
+        public (CommentModel, string) CreateComment(int postId, UserModel user)
+        {
+            (var Response, var StatusCode) = ApiUtils.PostRequest<RespModel<CommentModel>>($"{ConfigClass.Config["CreateComment"]}?post_id={postId}&message={TextGenerator.GenerteText()}&access_token={user.Token}&v={ConfigClass.Config["ApiVersion"]}");
+            return (Response.response, StatusCode);
         }
     }
 }

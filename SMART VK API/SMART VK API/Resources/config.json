@@ -6,6 +6,7 @@
   "UplServer": "/photos.getWallUploadServer",
   "SavePhoto": "/photos.saveWallPhoto",
   "WallEdit": "/wall.edit",
+  "CreateComment": "/wall.createComment",
   "PhotoParameterName": "photo",
   "PhotoContentType": "multipart/form-data"
 }

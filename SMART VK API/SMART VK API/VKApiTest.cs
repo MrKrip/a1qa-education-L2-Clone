@@ -32,6 +32,11 @@ namespace SMART_VK_API
             (var PhotoInfo, StatusCode) = vkRequests.UploadPhoto(UploadServer);
             (var SaveFotoResp, StatusCode) = vkRequests.SavePhoto(user, PhotoInfo);
             (var PostIdSecond, StatusCode) = vkRequests.WallEdit(PostId, user, SaveFotoResp.response[0]);
+
+            (var PhotoExist, var MessageChange) = profile.IsPostEdit(user.Id, PostIdSecond, SaveFotoResp.response[0].id, wallPost.message);
+            (var Comment, StatusCode) = vkRequests.CreateComment(PostId, user);
+
+            var ComentAdded = profile.IsCommentAdded(Comment, PostIdSecond, user.Id);
             Assert.Pass();
         }
     }
