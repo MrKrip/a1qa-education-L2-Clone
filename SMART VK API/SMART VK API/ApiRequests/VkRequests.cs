@@ -41,5 +41,17 @@ namespace SMART_VK_API.ApiRequests
             (var Response, var StatusCode) = ApiUtils.PostRequest<RespModel<CommentModel>>($"{ConfigClass.Config["CreateComment"]}?post_id={postId}&message={TextGenerator.GenerteText()}&access_token={user.Token}&v={ConfigClass.Config["ApiVersion"]}");
             return (Response.response, StatusCode);
         }
+
+        public (LikeModel,string) IsLiked(int postId, UserModel user)
+        {
+            (var Response, var StatusCode) = ApiUtils.PostRequest<RespModel<LikeModel>>($"{ConfigClass.Config["IsLiked"]}?type=post&item_id={postId}&access_token={user.Token}&v={ConfigClass.Config["ApiVersion"]}");
+            return (Response.response, StatusCode);
+        }
+
+        public (int,string) DeletePost(int postId,UserModel user)
+        {
+            (var Response, var StatusCode) = ApiUtils.PostRequest<RespModel<int>>($"{ConfigClass.Config["PostDelete"]}?post_id={postId}&access_token={user.Token}&v={ConfigClass.Config["ApiVersion"]}");
+            return (Response.response, StatusCode);
+        }
     }
 }

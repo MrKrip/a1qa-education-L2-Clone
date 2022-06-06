@@ -37,6 +37,11 @@ namespace SMART_VK_API
             (var Comment, StatusCode) = vkRequests.CreateComment(PostId, user);
 
             var ComentAdded = profile.IsCommentAdded(Comment, PostIdSecond, user.Id);
+            profile.AddLikeToPost(PostIdSecond, user.Id);
+
+            (var Liked, StatusCode) = vkRequests.IsLiked(PostIdSecond, user);
+            (var Deleted, StatusCode) = vkRequests.DeletePost(PostIdSecond, user);
+            PostExist = profile.IsPostExist(user.Id, PostId);
             Assert.Pass();
         }
     }

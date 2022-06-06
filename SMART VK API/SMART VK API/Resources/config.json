@@ -7,6 +7,8 @@
   "SavePhoto": "/photos.saveWallPhoto",
   "WallEdit": "/wall.edit",
   "CreateComment": "/wall.createComment",
+  "IsLiked": "/likes.isLiked",
+  "PostDelete": "/wall.delete",
   "PhotoParameterName": "photo",
   "PhotoContentType": "multipart/form-data"
 }

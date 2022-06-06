@@ -47,5 +47,11 @@ namespace SMART_VK_API.Pages
             ShowNewCommentButton.Click();
             return NewComment.State.WaitForExist();
         }
+
+        public void AddLikeToPost(int PostId,int UserId)
+        {
+            IElement LikeButton = AqualityServices.Get<IElementFactory>().GetButton(By.XPath($"//*[@id='post{UserId}_{PostId}']//div[contains(@class,'PostButtonReactionsContainer')]"), $"Like button for post{UserId}_{PostId}");
+            LikeButton.Click();
+        }
     }
 }
