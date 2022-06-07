@@ -3,11 +3,6 @@ using Aquality.Selenium.Elements.Interfaces;
 using Aquality.Selenium.Forms;
 using OpenQA.Selenium;
 using SMART_VK_API.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMART_VK_API.Pages
 {
@@ -29,6 +24,12 @@ namespace SMART_VK_API.Pages
         {
             IElement Post = AqualityServices.Get<IElementFactory>().GetLabel(By.Id($"post{UserId}_{PostId}"), $"Post {PostId} from {UserId} user");
             return Post.State.WaitForExist();
+        }
+
+        public bool IsPostNotExist(int UserId, int PostId)
+        {
+            IElement Post = AqualityServices.Get<IElementFactory>().GetLabel(By.Id($"post{UserId}_{PostId}"), $"Post {PostId} from {UserId} user");
+            return Post.State.WaitForNotDisplayed();
         }
 
         public (bool, bool) IsPostEdit(int UserId, int PostId, int PhotoId, string message)
