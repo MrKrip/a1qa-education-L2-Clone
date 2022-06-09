@@ -8,7 +8,13 @@ namespace SMART_VK_API.Pages
 {
     public class ProfilePage : Form
     {
-        private IElement PostField = AqualityServices.Get<IElementFactory>().GetTextBox(By.Id("post_field"), "Post field");
+        private ITextBox PostField = AqualityServices.Get<IElementFactory>().GetTextBox(By.Id("post_field"), "Post field");
+        private IButton ShowNewCommentButton(int UserId, int PostId) => AqualityServices.Get<IElementFactory>().GetButton(By.XPath($"//*[@id='replies{UserId}_{PostId}']//a"), "Show new comment button");
+        private ILabel Post(int UserId, int PostId) => AqualityServices.Get<IElementFactory>().GetLabel(By.Id($"post{UserId}_{PostId}"), $"Post {PostId} from {UserId} user");
+        private ILabel PostText(int UserId, int PostId) => AqualityServices.Get<IElementFactory>().GetLabel(By.XPath($"//*[@id='post{UserId}_{PostId}']//*[contains(@class,'wall_post_text')]"), $"Post {PostId} from {UserId} user");
+        private ILink PostPhoto(int UserId, int PostId, int PhotoId) => AqualityServices.Get<IElementFactory>().GetLink(By.XPath($"//*[@id='post{UserId}_{PostId}']//*[contains(@href,'photo{UserId}_{PhotoId}')]"), $"Photo {PhotoId} in {PostId} post");
+        private ILabel NewComment(int UserId, int PostId, CommentModel Comment) => AqualityServices.Get<IElementFactory>().GetLabel(By.XPath($"//*[@id='replies{UserId}_{PostId}']//*[@id='post{UserId}_{Comment.comment_id}']"), "");
+        private IButton LikeButton(int UserId, int PostId) => AqualityServices.Get<IElementFactory>().GetButton(By.XPath($"//*[@id='post{UserId}_{PostId}']//div[contains(@class,'PostButtonReactionsContainer')]"), $"Like button for post{UserId}_{PostId}");
 
         public ProfilePage() : base(By.Id("profile"), "Profile page")
         {
@@ -22,37 +28,30 @@ namespace SMART_VK_API.Pages
 
         public bool IsPostExist(int UserId, int PostId)
         {
-            IElement Post = AqualityServices.Get<IElementFactory>().GetLabel(By.Id($"post{UserId}_{PostId}"), $"Post {PostId} from {UserId} user");
-            return Post.State.WaitForExist();
+            return Post(UserId, PostId).State.WaitForExist();
         }
 
         public bool IsPostNotExist(int UserId, int PostId)
         {
-            IElement Post = AqualityServices.Get<IElementFactory>().GetLabel(By.Id($"post{UserId}_{PostId}"), $"Post {PostId} from {UserId} user");
-            return Post.State.WaitForNotDisplayed();
+            return Post(UserId, PostId).State.WaitForNotDisplayed();
         }
 
         public (bool, bool) IsPostEdit(int UserId, int PostId, int PhotoId, string message)
         {
-            IElement Post = AqualityServices.Get<IElementFactory>().GetLabel(By.XPath($"//*[@id='post{UserId}_{PostId}']//*[contains(@class,'wall_post_text')]"), $"Post {PostId} from {UserId} user");
-            IElement Photo = AqualityServices.Get<IElementFactory>().GetLink(By.XPath($"//*[@id='post{UserId}_{PostId}']//*[contains(@href,'photo{UserId}_{PhotoId}')]"), $"Photo {PhotoId} in {PostId} post");
-            Post.State.WaitForDisplayed();
-            return (Photo.State.WaitForExist(), message != Post.Text.ToString());
+            PostText(UserId, PostId).State.WaitForDisplayed();
+            return (PostPhoto(UserId, PostId, PhotoId).State.WaitForExist(), message != PostText(UserId, PostId).Text.ToString());
         }
 
         public bool IsCommentAdded(CommentModel Comment, int PostId, int UserId)
         {
-            IElement ShowNewCommentButton = AqualityServices.Get<IElementFactory>().GetButton(By.XPath($"//*[@id='replies{UserId}_{PostId}']//a"), "Show new comment button");
-            IElement NewComment = AqualityServices.Get<IElementFactory>().GetLabel(By.XPath($"//*[@id='replies{UserId}_{PostId}']//*[@id='post{UserId}_{Comment.comment_id}']"), "");
-            ShowNewCommentButton.State.WaitForClickable();
-            ShowNewCommentButton.Click();
-            return NewComment.State.WaitForExist();
+            ShowNewCommentButton(UserId, PostId).State.WaitForClickable();
+            ShowNewCommentButton(UserId, PostId).Click();
+            return NewComment(UserId, PostId, Comment).State.WaitForExist();
         }
 
-        public void AddLikeToPost(int PostId,int UserId)
+        public void AddLikeToPost(int PostId, int UserId)
         {
-            IElement LikeButton = AqualityServices.Get<IElementFactory>().GetButton(By.XPath($"//*[@id='post{UserId}_{PostId}']//div[contains(@class,'PostButtonReactionsContainer')]"), $"Like button for post{UserId}_{PostId}");
-            LikeButton.Click();
+            LikeButton(UserId, PostId).Click();
         }
     }
 }

@@ -14,7 +14,6 @@ namespace SMART_VK_API.Pages
         private IElement PasswordInput = AqualityServices.Get<IElementFactory>().GetTextBox(By.XPath("//input[@name='password']"), "Password input");
         private IElement PasswordSubmitButton = AqualityServices.Get<IElementFactory>().GetButton(By.XPath("//form[contains(@class,'vkc__EnterPasswordNoUserInfo__content')]//button[@type='submit']"), "Password submit button");
 
-
         public SignInPage() : base(By.Id("index_login"), "SignIn Page")
         {
 

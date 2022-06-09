@@ -2,11 +2,10 @@
 using NUnit.Framework;
 using SMART_VK_API.Util;
 
-namespace SMART_VK_API.Test_conditions
+namespace SMART_VK_API
 {
     public class BaseTest
     {
-
         [SetUp]
         public void Setup()
         {

@@ -3,25 +3,23 @@ using NUnit.Framework;
 using SMART_VK_API.ApiRequests;
 using SMART_VK_API.Models;
 using SMART_VK_API.Pages;
-using SMART_VK_API.Test_conditions;
 using SMART_VK_API.Util;
 
 namespace SMART_VK_API
 {
     public class Tests : BaseTest
     {
+        private SignInPage signIn = new SignInPage();
+        private SideBar sideBar = new SideBar();
+        private ProfilePage profile = new ProfilePage();
 
         [Test]
-        public void Test1()
+        public void Vk_Api_UI_InteractionWithTheWall()
         {
             UserModel user = ParseJSON.GetDataFile<UserModel>(ConfigClass.UserDataPath);
             WallPostModel wallPost = new WallPostModel() { access_token = user.Token, v = ConfigClass.Config["ApiVersion"] };
 
             VkRequests vkRequests = new VkRequests();
-
-            SignInPage signIn = new SignInPage();
-            SideBar sideBar = new SideBar();
-            ProfilePage profile = new ProfilePage();
 
             AqualityServices.Logger.Info($"Authorization");
             signIn.SignIn(user);
@@ -34,8 +32,7 @@ namespace SMART_VK_API
             Assert.AreEqual(StatusCode, "OK", "Status code is not 200.");
 
             AqualityServices.Logger.Info($"Checking if there is a post on the wall");
-            bool PostExist = profile.IsPostExist(user.Id, PostId);
-            Assert.IsTrue(PostExist, "Post is not exist");
+            Assert.IsTrue(profile.IsPostExist(user.Id, PostId), "Post is not exist");
 
             AqualityServices.Logger.Info($"Getting upload server for photo");
             (var UploadServer, StatusCode) = vkRequests.GetUploadServer(user);
@@ -64,8 +61,7 @@ namespace SMART_VK_API
             Assert.AreEqual(StatusCode, "OK", "Status code is not 200.");
 
             AqualityServices.Logger.Info($"Cheking if comment created");
-            var ComentAdded = profile.IsCommentAdded(Comment, PostIdSecond, user.Id);
-            Assert.IsTrue(ComentAdded, "Comment not added");
+            Assert.IsTrue(profile.IsCommentAdded(Comment, PostIdSecond, user.Id), "Comment not added");
 
             AqualityServices.Logger.Info($"Adding like to {PostId} post");
             profile.AddLikeToPost(PostIdSecond, user.Id);
@@ -81,8 +77,7 @@ namespace SMART_VK_API
             Assert.AreEqual(1, Deleted, "Post not deleted");
 
             AqualityServices.Logger.Info($"Cheking if post exist");
-            PostExist = profile.IsPostNotExist(user.Id, PostId);
-            Assert.IsTrue(PostExist,"Post still exist");
+            Assert.IsTrue(profile.IsPostNotExist(user.Id, PostId), "Post still exist");
         }
     }
 }
